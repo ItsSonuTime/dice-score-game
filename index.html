@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <div class="container">
+         <h1> Let,s play</h1>
+         <div id="msgbar">Results Here</div>
+      <div class="dices">
+   
+         <div class="dice">
+            <p id="player1"> Player 1</p>
+            <img src="dice6.png" id="img1">
+            <div id="score1">0</div>
+         </div>
+
+         <div class="dice">
+            <p id="player2"> Player 2</p>
+            <img src="dice6.png" id="img2">
+            <div id="score2">0</div>
+         </div>
+
+         
+      </div>
+       <div class="buttons">
+      <button id="start">start</button>
+      <button id="Edite" > Edit</button>
+        </div>
+   </div>
+  <script>
+
+   let strbtn = document.getElementById('start')
+   let editbtn = document.getElementById('Edite')
+    let player1 = "player1";
+    let player2 = "player2"
+
+     editbtn.addEventListener('click', ()=> { 
+
+      player1 = prompt("change the name player 1")
+       player2 = prompt("change the name player 2")
+       if(player1.length<1 || player2.length<1){
+         alert("please Enter the Name")
+
+         return;
+
+       }
+       document.getElementById("player1").innerHTML = player1;
+       document.getElementById("player1").style.color = "blue"
+       document.getElementById("player2").innerHTML = player2;
+       document.getElementById("player2").style.color = "darkgreen";
+
+     } )
+
+     let user1score = 0;
+     let user2score = 0;
+     let scores1 = document.getElementById('score1');
+     let scores2 = document.getElementById('score2');
+     let startbtn = document.querySelector('#start');
+     let results = document.querySelector('#msgbar');
+     let dicenumber1 = document.querySelector('#img1');
+     let dicenumber2 = document.querySelector('#img2');
+
+
+   strbtn.addEventListener('click', ()=>{
+        
+
+      dicenumber1.setAttribute("src","dicegame.gif");
+      dicenumber2.setAttribute("src","dicegame.gif");
+      setTimeout( ()=>{
+       
+         let randomnum1 = Math.floor(Math.random()*6)+1;
+         let randomnum2 = Math.floor(Math.random()*6)+1;
+
+         dicenumber1.setAttribute('src', 'dice'+randomnum1+'.png');
+         dicenumber2.setAttribute('src', 'dice'+randomnum2+'.png')
+
+
+         if(randomnum1=== randomnum2){
+            results.innerHTML = ` Game was Draw !`
+            results.style.color = "red";
+         } else if( randomnum1>randomnum2){
+            user1score++;
+            scores1.innerHTML = user1score;
+            results.innerHTML = ( `The Winner is  player 1`)
+            results.style.color = "blue";
+         } if( randomnum1<randomnum2){
+            user2score++;
+            results.style.color = "darkgreen";
+            scores2.innerHTML = user2score;
+            results.innerHTML = ( ` The Winner is player 2 `)
+         }
+      } ,3000)
+  
+   })
+
+ 
+     
+  </script>
+
+    
+</body>
+</html>
